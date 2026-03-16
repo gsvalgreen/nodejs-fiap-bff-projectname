@@ -14,6 +14,7 @@ router.get('/', async (req, res) => {
       endpoint: '/ask',
       timestamp: new Date().toISOString(),
     });
+    console.error('Erro ao consultar o OpenAI:', err);
     res.status(500).json({ error: 'Erro ao consultar o OpenAI' });
   }
 });
