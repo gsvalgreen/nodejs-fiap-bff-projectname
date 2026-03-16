@@ -1,17 +1,18 @@
 const axios = require('axios');
 
 async function askOpenAI() {
-  const prompt = `Elabore 5 palavras distintas e seus respectivos significados e um exemplo de uso. Retorne um JSON no formato [{word, description, useCase}]. Não adicione quebras de linhas.`;
+  const prompt = `Elabore 5 palavras aleatórias distintas e seus respectivos significados e um exemplo de uso. Retorne um JSON no formato [{word, description, useCase}]. Não adicione quebras de linhas.`;
 
-  const response = await axios.post('https://api.openai.com/v1/chat/completions', {
-    model: 'gpt-4',
+  const response = await axios.post('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', {
+    model: 'gemini-2.5-flash',
+    reasoning_effort: 'high',
     messages: [
-      { role: 'system', content: 'Responda somente questões relacionadas ao ensino de inglês.' },
+      { role: 'system', content: 'Responda somente questões relacionadas ao ensino de inglês' },
       { role: 'user', content: prompt }
     ]
   }, {
     headers: {
-      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
+      Authorization: `Bearer ${process.env.GEMINI_API_KEY}`,
     }
   });
 
