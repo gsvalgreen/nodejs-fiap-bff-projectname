@@ -4,7 +4,7 @@ async function askOpenAI() {
   const prompt = `Elabore 5 palavras aleatórias distintas e seus respectivos significados e um exemplo de uso. Retorne um JSON no formato [{word, description, useCase}]. Não adicione quebras de linhas, não repita palavras, use palavras criativas.`;
 
   const response = await axios.post('https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent', {
-    system_instructions: {
+    system_instruction: {
       parts: [
         { text: 'Responda somente questões relacionadas ao ensino de inglês.' }
       ]
@@ -15,7 +15,7 @@ async function askOpenAI() {
       ]
     }],
     generationConfig: {
-      temperature: 1.0
+      temperature: 2.0
     }
   }, {
     headers: {
@@ -23,7 +23,7 @@ async function askOpenAI() {
     }
   });
 
-  const message = response.data.choices[0].message.content.trim();
+  const message = response.data.candidates[0].content.parts[0].text.trim();
 
   return {
     answer: message,
