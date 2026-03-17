@@ -15,6 +15,7 @@ async function askOpenAI() {
       ]
     }],
     generationConfig: {
+      thinkingConfig: { thinkingLevel: 'low' },
       temperature: 2.0
     }
   }, {
